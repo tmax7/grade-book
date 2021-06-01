@@ -6,8 +6,6 @@ package grade.book;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class AppTest {
-    @Test public void testAppHasAGreeting() {
-        GradeBookApp classUnderTest = new GradeBookApp();
-    }
+public class GradeBookAppTest {
+
 }
