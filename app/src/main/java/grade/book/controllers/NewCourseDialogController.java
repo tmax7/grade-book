@@ -68,7 +68,7 @@ public class NewCourseDialogController {
     private void handleEditStudent() {
 
         int selectedIndex = this.studentTableView.getSelectionModel().getSelectedIndex();
-        // TODO check loaderLocation of each class to see if it matches that of the controller or see if can all set them to StudentInfoSystemApp.class.getResource("name of resource")...etc
+        // TODO check loaderLocation of each class to see if it matches that of the controller or see if can all set them to GradeBookApp.class.getResource("name of resource")...etc
         if( selectedIndex > -1) {
             // Gets the student selected in studentTableView
             Student student = studentTableView.getItems().get(selectedIndex);
@@ -203,7 +203,7 @@ public class NewCourseDialogController {
         }
     }
 
-    public void setStudentInfoSystemApp(GradeBookApp app){
+    public void setApp(GradeBookApp app){
         this.app = app;
     }
 

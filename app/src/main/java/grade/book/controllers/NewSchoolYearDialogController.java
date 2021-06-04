@@ -21,7 +21,7 @@ public class NewSchoolYearDialogController {
     private void initialize() {
     }
 
-    public void setStudentInfoSystemApp(GradeBookApp app) {
+    public void setApp(GradeBookApp app) {
         this.app = app;
     }
 

@@ -71,7 +71,7 @@ public class SchoolYearOverviewController {
 
                 // Gets the CourseOverviewController, links it with the app, and communicates which semester is selected
                 CourseOverviewController controller = loader.getController();
-                controller.setStudentInfoSystemApp(this.app);
+                controller.setApp(this.app);
                 controller.setCourseInfo(courseInfo);
                 controller.setSemester(semester);
 
@@ -240,7 +240,7 @@ public class SchoolYearOverviewController {
         springSemesterTitledPane.setText(springText);
     }
 
-    public void setStudentInfoSystemApp(GradeBookApp app){
+    public void setApp(GradeBookApp app){
         this.app = app;
         ObservableList<CourseInfo> fallSemesterClasses = this.app.getSchoolYearInfo().getListOfFallCourses();
         ObservableList<CourseInfo> springSemesterClasses = this.app.getSchoolYearInfo().getListOfSpringCourses();

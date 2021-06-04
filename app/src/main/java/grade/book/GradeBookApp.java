@@ -35,7 +35,7 @@ public class GradeBookApp extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         this.primaryStage = primaryStage;
-        this.primaryStage.setTitle("StudentInformationSystemApp");
+        this.primaryStage.setTitle("grade-book app");
 
         initRootLayout();
 
@@ -54,7 +54,7 @@ public class GradeBookApp extends Application {
 
             // Gives the controller access to the app.
             RootLayoutController controller = loader.getController();
-            controller.setStudentInfoSystemApp(this);
+            controller.setApp(this);
 
             // Makes the window visible
             primaryStage.show();
@@ -78,7 +78,7 @@ public class GradeBookApp extends Application {
 
             // Gives the controller access to the app
             this.schoolYearOverviewController = loader.getController();
-            this.schoolYearOverviewController.setStudentInfoSystemApp(this);
+            this.schoolYearOverviewController.setApp(this);
 
             // Sets schoolYearOverview into the center of the root layout
             rootLayout.setCenter(schoolYearOverview);
@@ -108,7 +108,7 @@ public class GradeBookApp extends Application {
 
             // Creates the controller and links it to this app and the stage
             NewSchoolYearDialogController controller = loader.getController();
-            controller.setStudentInfoSystemApp(this);
+            controller.setApp(this);
             controller.setStage(stage);
 
             // Shows the stage
@@ -132,7 +132,7 @@ public class GradeBookApp extends Application {
             stage.setScene(scene);
 
             NewCourseDialogController controller = loader.getController();
-            controller.setStudentInfoSystemApp(this);
+            controller.setApp(this);
             controller.setStage(stage);
             controller.setSchoolYearOverviewCourseList(courseList);
             controller.setSemester(semester);
@@ -222,10 +222,10 @@ public class GradeBookApp extends Application {
     public void setSchoolYearFilePath(File file) {
         if (file != null) {
             schoolYearFilePath = file.getPath();
-            primaryStage.setTitle("StudentInfoSystemApp:  " + file.getName());
+            primaryStage.setTitle("grade-book:  " + file.getName());
         } else {
             schoolYearFilePath = null;
-            primaryStage.setTitle("StudentInfoSystemApp");
+            primaryStage.setTitle("grade-book");
         }
     }
 

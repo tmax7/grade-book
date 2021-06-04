@@ -62,7 +62,7 @@ public class NewAssignmentDialogController {
         stage.close();
     }
 
-    public void setStudentInfoSystemApp(GradeBookApp app){
+    public void setApp(GradeBookApp app){
         this.app = app;
     }
 

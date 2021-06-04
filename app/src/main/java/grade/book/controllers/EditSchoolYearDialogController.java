@@ -74,7 +74,7 @@ public class EditSchoolYearDialogController {
         }
     }
 
-    public void setStudentInfoSystemApp(GradeBookApp app) {
+    public void setApp(GradeBookApp app) {
         this.app = app;
     }
 

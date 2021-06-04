@@ -21,7 +21,7 @@ public class RootLayoutController {
     public RootLayoutController(){
     }
 
-    public void setStudentInfoSystemApp(GradeBookApp app){
+    public void setApp(GradeBookApp app){
         this.app = app;
     }
 
@@ -112,7 +112,7 @@ public class RootLayoutController {
                 stage.setScene(scene);
 
                 EditSchoolYearDialogController controller = loader.getController();
-                controller.setStudentInfoSystemApp(this.app);
+                controller.setApp(this.app);
                 controller.setSchoolYearInfo(schoolYearInfo);
                 controller.setStage(stage);
 
@@ -132,7 +132,7 @@ public class RootLayoutController {
     private void handleAbout() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.initOwner(app.getPrimaryStage());
-        alert.setTitle("StudentInfoSystemApp");
+        alert.setTitle("grade-book");
         alert.setHeaderText("About");
         alert.setContentText("Author: Taylor Maxfield");
 

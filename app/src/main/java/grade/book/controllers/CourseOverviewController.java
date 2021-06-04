@@ -117,7 +117,7 @@ public class CourseOverviewController {
                 stage.setScene(scene);
 
                 // Gives the controller access to stage and app
-                controller.setStudentInfoSystemApp(this.app);
+                controller.setApp(this.app);
                 controller.setStage(stage);
 
                 stage.showAndWait();
@@ -225,7 +225,7 @@ public class CourseOverviewController {
                 stage.setScene(scene);
 
                 AssignmentInfoOverviewController controller = loader.getController();
-                controller.setStudentInfoSystemApp(this.app);
+                controller.setApp(this.app);
                 controller.setCourseInfo(this.courseInfo);
                 controller.setGradedItem(gradedItem);
                 controller.setStage(stage);
@@ -261,7 +261,7 @@ public class CourseOverviewController {
                 and window.
             */
             NewAssignmentDialogController controller = loader.getController();
-            controller.setStudentInfoSystemApp(this.app);
+            controller.setApp(this.app);
             controller.setCourseInfo(this.courseInfo);
             controller.setSemester(this.semester);
             controller.setStage(stage);
@@ -334,11 +334,11 @@ public class CourseOverviewController {
         }
     }
 
-    public GradeBookApp getStudentInfoSystemApp() {
+    public GradeBookApp getApp() {
         return app;
     }
 
-    public void setStudentInfoSystemApp(GradeBookApp app) {
+    public void setApp(GradeBookApp app) {
         this.app = app;
     }
 

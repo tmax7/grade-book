@@ -50,7 +50,7 @@ public class ClassOverviewController {
         //notesColumn.setCellValueFactory(cellData -> cellData.getValue().notesProperty());
     }
 
-    public void setStudentInfoSystemApp(GradeBookApp app){
+    public void setApp(GradeBookApp app){
         this.app = app;
     }
 
