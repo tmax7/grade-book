@@ -39,7 +39,7 @@ public class EditAssignmentDialogController {
             assignment.setDescription(newDescription);
             assignment.setMaxScore(newMaxScore);
 
-            //apply changes to each student's version of gradedItem then recalculate that student's percent and grade
+            // Applies changes to each student's version of the gradedItem then recalculates that student's percent and grade
             String idOfEditedGradedItem = this.assignment.getID();
             for(Student student : courseInfo.getStudents()){
                for(GradedItem gradedItem : student.getGradedItems()){
@@ -83,7 +83,7 @@ public class EditAssignmentDialogController {
                 alert.setTitle("Invalid Fields");
                 alert.setHeaderText("No valid points (must be in numeric form e.g. 40)");
 
-                //TODO might have to do lambda on this to fiter out OK response
+                // TODO might have to do lambda on this to fiter out OK response
                 alert.showAndWait();
 
                 return false;

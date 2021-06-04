@@ -18,23 +18,20 @@ import java.io.IOException;
 
 
 public class NewCourseDialogController {
-
     private GradeBookApp app;
     private Stage stage;
     private String semester;
 
-    // external either Fall or Spring courseList from SchoolYearOverview that the new course will be added to.
-    // As a side note: course will be added to app studentInformationApp SchoolYearInfo as well
+    /* 
+        External either Fall or Spring courseList from SchoolYearOverview that the new course will be added to.
+        As a side note: course will be added to app studentInformationApp SchoolYearInfo as well
+    */
     @FXML
     private ListView<CourseInfo> schoolYearOverviewCourseList;
-
     @FXML
     private TextField courseNameTextField;
-
     @FXML
     private TextField coursePeriodTextField;
-
-
     @FXML
     private TableView<Student> studentTableView;
     @FXML
@@ -43,16 +40,14 @@ public class NewCourseDialogController {
     private TableColumn<Student, String> firstNameColumn;
     @FXML
     private TableColumn<Student, String> lastNameColumn;
-
     @FXML
     private TextField studentIdTextField;
     @FXML
     private TextField firstNameTextField;
     @FXML
     private TextField lastNameTextField;
-
+    // The container to hold students added to course in this dialog;
     @FXML
-    //container to hold students added to course in this dialog;
     private ObservableList<Student> students = FXCollections.observableArrayList();
 
 
@@ -73,9 +68,9 @@ public class NewCourseDialogController {
     private void handleEditStudent() {
 
         int selectedIndex = this.studentTableView.getSelectionModel().getSelectedIndex();
-        //TODO check loaderLocation of each class to see if it matches that of the controller or see if can all set them to StudentInfoSystemApp.class.getResource("name of resource")...etc
+        // TODO check loaderLocation of each class to see if it matches that of the controller or see if can all set them to StudentInfoSystemApp.class.getResource("name of resource")...etc
         if( selectedIndex > -1) {
-            //get student selected in studentTableView
+            // Gets the student selected in studentTableView
             Student student = studentTableView.getItems().get(selectedIndex);
             try{
                 FXMLLoader loader = new FXMLLoader();
@@ -124,8 +119,6 @@ public class NewCourseDialogController {
 
             studentIdTextField.requestFocus();
         }
-
-
     }
 
     @FXML
@@ -142,7 +135,6 @@ public class NewCourseDialogController {
             }
 
             CourseInfo courseInfo = new CourseInfo(courseName, coursePeriod, sem, schoolYear, null, this.students);
-
 
             if (this.semester.equals("Fall")){
                 app.getSchoolYearInfo().addToFallCourses(courseInfo);

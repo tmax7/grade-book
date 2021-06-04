@@ -14,15 +14,16 @@ public class Student {
     private StringProperty studentId  = new SimpleStringProperty("none");
     private StringProperty firstName  = new SimpleStringProperty("none");
     private StringProperty lastName  = new SimpleStringProperty("none");
-    //Can't call attribute "class" because "class" is obviously a reserved work in Java.
 
     private ObservableList<GradedItem> gradedItems = FXCollections.observableArrayList();
 
     private StringProperty percent = new SimpleStringProperty("none");
     private StringProperty grade = new SimpleStringProperty("none");
 
-    //TODO possibly add notes
-    // private StringProperty notes
+    /*
+        TODO possibly add notes field like so:
+            private StringProperty notes
+    */
 
     public Student() {
     }
@@ -41,7 +42,7 @@ public class Student {
         }
     }
 
-    //unwrap constructor
+    // This constructor is used to unwrap a StudentWrapper object into a Student object
     public Student(StudentWrapper studentWrapper){
         if(studentWrapper.getCourseName() != null) { this.courseName.setValue(studentWrapper.getCourseName()); }
         if(studentWrapper.getCoursePeriod() != null) { this.coursePeriod.setValue(studentWrapper.getCoursePeriod()); }
@@ -59,7 +60,6 @@ public class Student {
 
     }
 
-   //getters and setters
     public String getCourseName() {
         return courseName.get();
     }
@@ -120,7 +120,6 @@ public class Student {
         this.lastName.set(lastName);
     }
 
-    //TODO find out if making this package private has any negative effects.
     public ObservableList<GradedItem> getGradedItems() {
         return gradedItems;
     }
@@ -153,26 +152,27 @@ public class Student {
         this.grade.set(grade);
     }
 
-    //get gradedItems as an ArrayList for conversion to xml
+    // Gets gradedItems as an ArrayList for conversion to XML
     public ArrayList<GradedItem> getGradedItemsAsArrayList() {
         return new ArrayList<>(this.gradedItems);
     }
 
 
-    //add to gradedItems and recalculate percent and letter grade
+    // Adds to gradedItems and recalculates percent and letter grade
     public void addGradedItem(GradedItem gradedItem) {
         this.gradedItems.add(gradedItem);
         calculatePercentAndGrade();
     }
 
     public void calculatePercentAndGrade() {
-
         double percent;
         int score = 0;
         int maxScore = 0;
-//TODO make sure that seting score+= to maxScore if no score is assigned to it works out. And find out if later updating the score
-// actually changes it as well
-        //if there are no graded items then there is no percent or grade
+        /*
+            TODO make sure that seting score+= to maxScore if no score is assigned to it works out. And find out if later updating the score
+            actually changes it as well
+        */
+        // if there are no graded items, then there is no percent or grade
         if(gradedItems.size() > 0){
             for (GradedItem item : gradedItems) {
                 if(item != null){
@@ -206,7 +206,8 @@ public class Student {
             calculateGrade();
         }
     }
-    // changed from public
+    
+    // Changed from public
     private void calculateGrade() {
             String letter = percentToLetter(this.percent.get());
             this.grade.setValue(letter);

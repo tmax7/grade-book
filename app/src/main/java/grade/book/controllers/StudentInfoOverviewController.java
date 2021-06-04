@@ -71,12 +71,12 @@ public class StudentInfoOverviewController {
     public void setStudent(Student student) {
         this.student = student;
 
-        // make the ObservableList of the table the students gradedItemObservableList
+        // Makes the ObservableList of the table the students gradedItemObservableList
         this.gradedItemObservableList = student.getGradedItems();
 
-//     TODO this was old way ->   this.gradedItemTableView.getItems().addAll(student.getGradedItems()); see if it still works:
+        //TODO this was old way ->  this.gradedItemTableView.getItems().addAll(student.getGradedItems()); see if it still works:
         this.gradedItemTableView.setItems(student.getGradedItems());
-        //set text of labels with info from student
+        // Sets the text of the labels with the info from the student
         if(student.getStudentId() != null) { this.studentIdLabel.setText(student.getStudentId()); }
         if(student.getFirstName() != null) { this.firstNameLabel.setText(student.getFirstName()); }
         if(student.getLastName() != null) { this.lastNameLabel.setText(student.getLastName()); }
@@ -95,21 +95,23 @@ public class StudentInfoOverviewController {
     }
     @FXML
     private void handleEditScore(){
-        //get selected gradedItem from TableView
+        // Gets the selected gradedItem from TableView
         GradedItem gradedItemToEdit = this.gradedItemTableView.getSelectionModel().getSelectedItem();
-        //create textInputDialog
+        // Creates the textInputDialog
         TextInputDialog inputDialog = new TextInputDialog();
         inputDialog.setTitle("New Score");
         inputDialog.setHeaderText("");
         inputDialog.setContentText("Enter New Score");
 
-        //show inputDialog and get text user inputted as result
+        // Shows the inputDialog and gets the text the user gave it as input.
         inputDialog.showAndWait();
         String result = inputDialog.getResult();
         System.out.println(result);
-        //if result is int then sets score to result
-        //if result is null or empty string (i.e. user clicked cancel, or clicked ok with no input) then do nothing
-        //if result is string that is not int then shows alert
+        /*
+            if result is int then sets score to result
+            if result is null or empty string (i.e. user clicked cancel, or clicked ok with no input) then does nothing
+            if result is string that is not int then shows alert
+        */
         try{
             Integer.parseInt(result);
             gradedItemToEdit.setScore(result);
@@ -123,12 +125,12 @@ public class StudentInfoOverviewController {
             }
         }
     }
+    
     @FXML
     private void handleOK(){
         this.stage.close();
     }
 
-    //setters
     public void setStudentInfoSystemApp(GradeBookApp app){
         this.app = app;
     }

@@ -26,9 +26,12 @@ public class ClassOverviewController {
     @FXML
     private TableColumn<Student, String> gradeColumn;
 
-    //TODO add functionality to add notes attribute by adding it to Student class
-    //@FXML
-    //private TableColumn<Student, String> notesColumn;
+    /*
+        TODO add functionality to add notes attribute by adding it to Student class
+        so this field can be added:
+            @FXML
+            private TableColumn<Student, String> notesColumn;
+    */
 
     private GradeBookApp app;
 

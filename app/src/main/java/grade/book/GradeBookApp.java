@@ -21,6 +21,9 @@ import javax.xml.bind.Unmarshaller;
 import java.io.File;
 import java.io.IOException;
 
+/*
+    This is the code for the app
+*/
 public class GradeBookApp extends Application {
     private Stage primaryStage;
     private BorderPane rootLayout;
@@ -40,20 +43,20 @@ public class GradeBookApp extends Application {
 
     public void initRootLayout(){
         try {
-            // Load root layout from fxml file.
+            // Loads the root layout from the fxml file.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(GradeBookApp.class.getResource("/RootLayout.fxml"));
             rootLayout = (BorderPane) loader.load();
 
-            // Show the scene containing the root layout.
+            // Shows the scene containing the root layout.
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
 
-            // Give the controller access to the main app.
+            // Gives the controller access to the app.
             RootLayoutController controller = loader.getController();
             controller.setStudentInfoSystemApp(this);
 
-            //Make window viable
+            // Makes the window visible
             primaryStage.show();
 
 
@@ -68,16 +71,16 @@ public class GradeBookApp extends Application {
 
     public void showSchoolYearOverview(){
         try {
-            // Load student overview.
+            // Loads the school year overview.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(GradeBookApp.class.getResource("/SchoolYearOverview.fxml"));
             AnchorPane schoolYearOverview = (AnchorPane) loader.load();
 
-            //Give the controller access to the Student Info System app
+            // Gives the controller access to the app
             this.schoolYearOverviewController = loader.getController();
             this.schoolYearOverviewController.setStudentInfoSystemApp(this);
 
-            //Set schoolYearOverview into the center of the root layout
+            // Sets schoolYearOverview into the center of the root layout
             rootLayout.setCenter(schoolYearOverview);
 
 
@@ -95,7 +98,7 @@ public class GradeBookApp extends Application {
             loader.setLocation(GradeBookApp.class.getResource("/NewSchoolYearDialog.fxml"));
             AnchorPane page = (AnchorPane) loader.load();
 
-            // creates stage and sets it with scene
+            // Creates the stage and sets it with the scene
             Stage stage = new Stage();
             stage.setTitle("Add New School Year");
             stage.initModality(Modality.WINDOW_MODAL);
@@ -103,12 +106,12 @@ public class GradeBookApp extends Application {
             Scene scene = new Scene(page);
             stage.setScene(scene);
 
-            // creates controller and links it to this app and stage
+            // Creates the controller and links it to this app and the stage
             NewSchoolYearDialogController controller = loader.getController();
             controller.setStudentInfoSystemApp(this);
             controller.setStage(stage);
 
-            // shows the stage
+            // Shows the stage
             stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
@@ -142,14 +145,13 @@ public class GradeBookApp extends Application {
     }
 
 
-    ///TODO is XML correct solution for this application?
     public void loadSchoolYearFromFile(File file) {
 
         try {
             JAXBContext context = JAXBContext.newInstance(SchoolYearInfoWrapper.class);
             Unmarshaller um = context.createUnmarshaller();
 
-            //Reads XML from the file and unmarshals it.
+            // Reads XML from the file and unmarshals it.
             SchoolYearInfoWrapper schoolYearInfoWrapper = (SchoolYearInfoWrapper) um.unmarshal(file);
 
 //            //Test
@@ -157,7 +159,7 @@ public class GradeBookApp extends Application {
 //            System.out.println(schoolYearInfoWrapper.getListOfFallCourses());
 //            System.out.println(schoolYearInfoWrapper.getListOfSpringCourses());
 
-            //clear schoolYearInfo and then set it with info from importedSchoolYearInfo gotten from unwrapped SchoolYearInfoWrapper
+            // Clears schoolYearInfo and then sets it with the info from the unwrapped schoolYearInfoWrapper
             this.clearSchoolYearInfo();
             SchoolYearInfo importedSchoolYearInfo = unwrapSchoolYearInfoWrapper(schoolYearInfoWrapper);
 
@@ -168,11 +170,11 @@ public class GradeBookApp extends Application {
 
             this.schoolYearInfo = importedSchoolYearInfo;
 
-            //reload schoolYearOverview with new schoolYearInfo and update the TitlePanes
+            // Reloads schoolYearOverview with new schoolYearInfo and updates the TitlePanes
             showSchoolYearOverview();
             updateSchoolYearTitles();
 
-            //set filePath to opened file's path
+            // Sets filePath to opened file's path
             setSchoolYearFilePath(file);
 
         } catch (Exception e) {
@@ -195,9 +197,9 @@ public class GradeBookApp extends Application {
             SchoolYearInfoWrapper wrapper = new SchoolYearInfoWrapper(this.schoolYearInfo);
             m.marshal(wrapper, file);
 
-            // set FilePath to the saved file's path
+            // Sets FilePath to the saved file's path
             setSchoolYearFilePath(file);
-        } catch (Exception e) { // catches ANY exception
+        } catch (Exception e) { 
             e.printStackTrace();
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
@@ -251,7 +253,9 @@ public class GradeBookApp extends Application {
        return new SchoolYearInfo(schoolYearInfoWrapper);
     }
 
-    //main function
+    /*
+        main function
+    */
     public static void main(String[] args) {
         launch(args);
     }

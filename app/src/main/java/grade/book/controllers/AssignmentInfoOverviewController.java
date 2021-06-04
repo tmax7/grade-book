@@ -66,8 +66,6 @@ public class AssignmentInfoOverviewController {
         this.stage.close();
     }
 
-    //Setter's
-
     public void setStudentInfoSystemApp(GradeBookApp app) {
         this.app = app;
     }
@@ -84,9 +82,10 @@ public class AssignmentInfoOverviewController {
         coursePeriodLabel.setText(courseInfo.getCoursePeriod());
     }
 
-    // set CellValueFactory here because need to call calculateIndex()
-    //
-    // which cannot happen until after initialize() method is called;
+    /*
+        Sets CellValueFactory here because we need to call calculateIndex()
+        which cannot happen until after initialize() method is called;
+    */
     public void setGradedItem(GradedItem gradedItem) {
         this.gradedItem = gradedItem;
         int index = calculateIndex();
@@ -103,7 +102,7 @@ public class AssignmentInfoOverviewController {
         maxScoreColumn.setCellValueFactory(cellData -> cellData.getValue().getGradedItems().get(index).maxScoreProperty());
         percentColumn.setCellValueFactory(cellData -> cellData.getValue().getGradedItems().get(index).percentGradeProperty());
     }
-    //
+
 //    @FXML
 //    private void handleEditStart(TableColumn.CellEditEvent<Student, String> studentStringCellEditEvent){
 //        EventHandler<TableColumn.CellEditEvent<Student, String>> editCommitEventHandler = new EventHandler<TableColumn.CellEditEvent<Student, String>>() {
@@ -114,43 +113,46 @@ public class AssignmentInfoOverviewController {
 //        }
 //        studentStringCellEditEvent.getTableView().getEditingCell().getTableColumn().setOnEditCommit();
 //    }
+
     @FXML
     private void handleEditCommit(TableColumn.CellEditEvent<Student,String> studentStringCellEditEvent) {
-        //TODO find out if can make index = calculateIndex(); member of this function instead
-        // of used in each method  to calculate index where graded item is in index
+        /*
+            TODO find out if can make index = calculateIndex(); member of this function instead
+            of used in each method  to calculate index where graded item is in index
+        */
         int index = calculateIndex();
-        //get student who was edited
+        //Gets student who was edited
         int studentRowNumber = studentStringCellEditEvent.getTablePosition().getRow();
         Student student = studentStringCellEditEvent.getTableView().getItems().get(studentRowNumber);
 
         String oldScore = studentStringCellEditEvent.getOldValue();
         String newScore = studentStringCellEditEvent.getNewValue();
         try {
-            //see if input is a Integer
+            // Sees if input is a Integer
             Integer.parseInt(newScore);
-            //if no exception thrown set score to newScore and recalculate students percent and grade
+            // If no exception is thrown, sets the student's score to newScore and recalculates the student's percent and grade.
             student.getGradedItems().get(index).setScore(newScore);
             student.calculatePercentAndGrade();
         } catch(NumberFormatException nfe) {
-            //show alert
+            // Shows alert
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.initOwner(this.app.getPrimaryStage());
             alert.setContentText("Score must be a positive whole number e.g. 47");
             alert.showAndWait();
-            //set score to oldScore
+            // Sets student's score to oldScore
             student.getGradedItems().get(index).setScore(oldScore);
-            //get scoreColumnTable column
+            // Sets the Cell to the edit state
             TableColumn<Student,String> scoreColumn = studentStringCellEditEvent.getTablePosition().getTableColumn();
-            //set Cell to edit state
             studentStringCellEditEvent.getTableView().edit(studentRowNumber, scoreColumn);
         }
     }
 
     private int calculateIndex(){
-        // finds what the index within the courseInfo's gradedItemList
-        // is of the gradedItem that has been selected
-        // by comparing the selected gradedItem's ID to the ID's in the gradedItemList;
-
+        /* 
+            Finds what the index within the courseInfo's gradedItemList
+            is of the gradedItem that has been selected
+            by comparing the selected gradedItem's ID to the ID's in the gradedItemList;
+        */
         int index = -1;
         String gradedItemIndex = gradedItem.getID();
         ObservableList<GradedItem> gradedItems = courseInfo.getGradedItems();
@@ -161,7 +163,7 @@ public class AssignmentInfoOverviewController {
                     break;
                 }
         }
-
+        
         return index;
     }
 

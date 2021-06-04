@@ -41,71 +41,74 @@ public class CourseOverviewController {
     @FXML
     private void initialize() {
         try{
-            /* for class overview */
+            /* For class overview */
             FXMLLoader classOverviewLoader = new FXMLLoader();
             classOverviewLoader.setLocation(CourseOverviewController.class.getResource("/ClassOverview.fxml"));
             AnchorPane page = (AnchorPane) classOverviewLoader.load();
 
-            // make page fit to parent topAnchorPaneOfStudentsTab
+            // Makes the page fit to its parent topAnchorPaneOfStudentsTab
             page.prefHeightProperty().bind(studentsTabTopAnchorPane.heightProperty());
             page.prefWidthProperty().bind(studentsTabTopAnchorPane.widthProperty());
 
             studentsTabTopAnchorPane.getChildren().add(page);
 
-            //get student table from ClassOverviewController
+            // Gets the student table from ClassOverviewController
             ClassOverviewController classOverviewController = classOverviewLoader.getController();
             importedStudentTableView = classOverviewController.getStudentTableView();
 
-            /* for assignments overview */
+            /* For assignments overview */
             FXMLLoader assignmentsOverviewLoader = new FXMLLoader();
             assignmentsOverviewLoader.setLocation(CourseOverviewController.class.getResource("/AssignmentsOverview.fxml"));
             AnchorPane page2 = (AnchorPane) assignmentsOverviewLoader.load();
 
-            // get the controller so that SchoolYearOverviewController can call linkGradedItemLists method and to get assignment table
+            // Gets the controller so that SchoolYearOverviewController can call linkGradedItemLists method  to get the assignment table
             AssignmentsOverviewController assignmentsOverviewController = assignmentsOverviewLoader.getController();
             this.assignmentsOverviewController = assignmentsOverviewController;
             importedAssignmentsTableView = assignmentsOverviewController.getAssignmentsTableView();
-            //
+
             page2.prefHeightProperty().bind(assignmentsTabTopAnchorPane.heightProperty());
             page2.prefWidthProperty().bind(assignmentsTabTopAnchorPane.widthProperty());
 
             assignmentsTabTopAnchorPane.getChildren().add(page2);
 
 
-            /*  TODO make student info update when student tab is selected */
-//            studentsTab.setOnSelectionChanged(new EventHandler<Event>() {
-//                @Override
-//                public void handle(Event event) {
-//
-//                }
-//            });
+            /*  
+                TODO make student info update when student tab is selected 
+                    studentsTab.setOnSelectionChanged(new EventHandler<Event>() {
+                        @Override
+                        public void handle(Event event) {
+                        }
+                    });
+            */
         } catch(IOException e){
             e.printStackTrace();
         }
 
     }
 
-    // students tabPane button "event handlers" so to speak
+    // The students tabPane button "event handlers" so to speak
     @FXML
     private void handleShowStudentInfo(){
-        //get index of student selected in studentTableView
+        // Gets the index of the student selected in studentTableView
         int selectedIndex = this.importedStudentTableView.getSelectionModel().getSelectedIndex();
-        // make sure a student is selected
+        // Makes sure a student is selected
         if( selectedIndex > -1){
-            //get student selected in studentTableView
+            // Gets the student selected in studentTableView
             Student student = importedStudentTableView.getItems().get(selectedIndex);
             try{
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(CourseOverviewController.class.getResource("/StudentInfoOverview.fxml"));
                 AnchorPane page = (AnchorPane) loader.load();
 
-                //give controller access to selected student and also setStudent method will get everything else
-                // ready in StudentInfoOverview;
+                /* 
+                    Gives the controller access to the selected student and 
+                    setStudent method will get everything else ready in StudentInfoOverview
+                */
                 StudentInfoOverviewController controller = loader.getController();
                 controller.setStudent(student);
 
 
-                //create stage
+                // Creates the stage
                 Stage stage = new Stage();
                 stage.setTitle("Student Info");
                 stage.initModality(Modality.WINDOW_MODAL);
@@ -113,7 +116,7 @@ public class CourseOverviewController {
                 Scene scene = new Scene(page);
                 stage.setScene(scene);
 
-                //give controller access to stage and app
+                // Gives the controller access to stage and app
                 controller.setStudentInfoSystemApp(this.app);
                 controller.setStage(stage);
 
@@ -157,7 +160,7 @@ public class CourseOverviewController {
         int selectedIndex = this.importedStudentTableView.getSelectionModel().getSelectedIndex();
 
         if( selectedIndex > -1) {
-            //get student selected in studentTableView
+            // Gets the student selected in studentTableView
             Student student = importedStudentTableView.getItems().get(selectedIndex);
             try{
                 FXMLLoader loader = new FXMLLoader();
@@ -191,7 +194,7 @@ public class CourseOverviewController {
 
             alert.showAndWait().ifPresent(response -> {
                 if (response == ButtonType.OK) {
-                    //get student selected in studentTableView
+                    // Gets the student selected in studentTableView
                     importedStudentTableView.getItems().remove(selectedIndex);
                 }
             });
@@ -206,7 +209,7 @@ public class CourseOverviewController {
         int selectedIndex = this.importedAssignmentsTableView.getSelectionModel().getSelectedIndex();
 
         if(selectedIndex > -1) {
-            //get assignment selected in assignmentsTableView
+            // Gets the assignment selected in assignmentsTableView
             GradedItem gradedItem = this.importedAssignmentsTableView.getItems().get(selectedIndex);
 
             try {
@@ -250,21 +253,21 @@ public class CourseOverviewController {
             Scene scene = new Scene(page);
             stage.setScene(scene);
 
-            //give controller access to:
-            // app,
-            // semester,
-            // list of gradedItems in courseInfo which is shared also with AssignmentOverviewController,
-            // and window
+            /*
+            Gives the controller access to:
+                app,
+                semester,
+                list of gradedItems in courseInfo which is shared also with AssignmentOverviewController,
+                and window.
+            */
             NewAssignmentDialogController controller = loader.getController();
             controller.setStudentInfoSystemApp(this.app);
             controller.setCourseInfo(this.courseInfo);
             controller.setSemester(this.semester);
             controller.setStage(stage);
 
-            //show window and wait till action performed
+            // Shows the window and waits till an action performed
             stage.showAndWait();
-
-
 
         } catch(IOException e){
             e.printStackTrace();
@@ -272,11 +275,10 @@ public class CourseOverviewController {
     }
     @FXML
     private void handleEditAssignment(){
-
         int selectedIndex = this.importedAssignmentsTableView.getSelectionModel().getSelectedIndex();
 
         if(selectedIndex > -1){
-            //get assignment selected in assignmentsTableView
+            // Gets the assignment selected in assignmentsTableView
             GradedItem gradedItem = this.importedAssignmentsTableView.getItems().get(selectedIndex);
             try{
                 FXMLLoader loader = new FXMLLoader();
@@ -311,10 +313,10 @@ public class CourseOverviewController {
             alert.setContentText("Deleting an assignment removes all its data. Are you sure you wish to proceed?");
             alert.showAndWait().ifPresent(response -> {
                 if(response == ButtonType.OK) {
-                    //get assignment selected in assignmentsTableView
+                    // Gets the assignment selected in assignmentsTableView
                     GradedItem gradedItem = this.importedAssignmentsTableView.getItems().get(selectedIndex);
 
-                    //removeGradedItem from each Student
+                    // Removes the GradedItem from each Student
                     String gradedItemID = gradedItem.getID();
                     for(Student student : courseInfo.getStudents()){
                         for(int i = 0; i < student.getGradedItems().size(); i++){
@@ -325,7 +327,7 @@ public class CourseOverviewController {
                             }
                         }
                     }
-                    //remove assignment from assignmentTableView
+                    // Removes the assignment from assignmentTableView
                     this.importedAssignmentsTableView.getItems().remove(selectedIndex);
                 }
             });
@@ -371,8 +373,6 @@ public class CourseOverviewController {
     public void setImportedAssignmentsTableView(TableView<GradedItem> importedAssignmentsTableView) {
         this.importedAssignmentsTableView = importedAssignmentsTableView;
     }
-
-    // sets the course's assignment list to the assignmentOverviewController's list so they share same list
 
 }
 

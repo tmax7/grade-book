@@ -21,7 +21,9 @@ public class CourseInfo {
 
     private int indexOfGradedItems = 0;
 
-    //Constructors
+    /*
+        Constructors
+    */
     public CourseInfo(){
     }
 
@@ -49,7 +51,7 @@ public class CourseInfo {
         }
     }
 
-    //unwrap constructor
+    // This is the constructor used to unwrap a CourseInfoWrapper object into a CourseInfo object
     public CourseInfo(CourseInfoWrapper courseInfoWrapper) {
         if(courseInfoWrapper.getCourseName() != null) { this.courseName.setValue(courseInfoWrapper.getCourseName()); }
         if(courseInfoWrapper.getCoursePeriod() != null) { this.coursePeriod.setValue(courseInfoWrapper.getCoursePeriod()); }
@@ -67,9 +69,8 @@ public class CourseInfo {
 
         this.indexOfGradedItems = courseInfoWrapper.getIndexOfGradedItems();
     }
+    /**/
 
-
-    //Getters and Setters
     public String getCourseName() {
         return courseName.get();
     }
@@ -117,7 +118,7 @@ public class CourseInfo {
     public void setSchoolYear(String schoolYear) {
         this.schoolYear.set(schoolYear);
     }
-    //TODO find out if making this package private has any negative effects.
+
     public ObservableList<GradedItem> getGradedItems() {
         return gradedItems;
     }
@@ -125,7 +126,7 @@ public class CourseInfo {
     public void setGradedItems(ObservableList<GradedItem> gradedItems) {
         this.gradedItems = gradedItems;
     }
-    //TODO find out if making this package private has any negative effects.
+
     public ObservableList<Student> getStudents() {
         return students;
     }
@@ -138,10 +139,7 @@ public class CourseInfo {
         return indexOfGradedItems;
     }
 
-
-
-    //get gradedItems and students as an ArrayList for conversion to xml
-
+    // Gets gradedItems and students as an ArrayList for conversion to xml
     public ArrayList<GradedItem> getGradedItemsAsArrayList() {
         return new ArrayList<GradedItem>(this.gradedItems);
     }

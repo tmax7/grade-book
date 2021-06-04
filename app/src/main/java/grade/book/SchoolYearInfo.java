@@ -26,7 +26,7 @@ public class SchoolYearInfo {
         if(this.listOfSpringCourses != null) { this.listOfSpringCourses = listOfSpringCourses; }
     }
 
-    //unwrap constructor
+    // This is the constructor used to unwrap a SchoolYearInfoWrapper object into a SchoolYearInfo object 
     SchoolYearInfo(SchoolYearInfoWrapper schoolYearInfoWrapper){
         if(schoolYearInfoWrapper.getSchoolYear() != null) { this.schoolYear = schoolYearInfoWrapper.getSchoolYear(); }
 

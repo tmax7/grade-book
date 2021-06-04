@@ -11,12 +11,10 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class NewAssignmentDialogController {
-
     private GradeBookApp app;
     private CourseInfo courseInfo;
     private String semester;
     private Stage stage;
-
 
     @FXML
     private TextField nameTextField;
@@ -24,7 +22,6 @@ public class NewAssignmentDialogController {
     private TextArea descriptionTextField;
     @FXML
     private TextField pointsTextField;
-
 
     public NewAssignmentDialogController(){
     }
@@ -44,11 +41,11 @@ public class NewAssignmentDialogController {
 
             GradedItem assignment = new GradedItem(id, name, null, points, null, description );
 
-            //add assignment to list of graded items in courseInfo and increment course info's gradedItemIndex
+            // Adds the assignment to the list of graded items in courseInfo and increments the course info's gradedItemIndex
             this.courseInfo.getGradedItems().add(assignment);
             this.courseInfo.incrementGradedItemIndex();
 
-            //create a copy for each student that can be independently edited for each of them
+            // Creates a copy for each student that can be independently edited for each of them.
             for(Student student : courseInfo.getStudents()){
                     GradedItem studentCopyOfAssignment = new GradedItem(id, name, null, points, null, description );
                     //adds gradedItem and recalculates students grade
@@ -57,7 +54,6 @@ public class NewAssignmentDialogController {
             }
 
             stage.close();
-
         }
     }
 
@@ -104,7 +100,7 @@ public class NewAssignmentDialogController {
                 alert.setTitle("Invalid Fields");
                 alert.setHeaderText("No valid points (must be in numeric form e.g. 40)");
 
-                //TODO might have to do lambda on this to fiter out OK response
+                // TODO might have to do lambda on this to fiter out OK response
                 alert.showAndWait();
 
                 return false;
@@ -122,6 +118,5 @@ public class NewAssignmentDialogController {
             return false;
         }
     }
-
 
 }

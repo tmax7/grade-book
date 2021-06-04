@@ -8,10 +8,8 @@ import javafx.stage.Stage;
 
 
 public class EditStudentDialogController {
-
     private Stage stage;
     private Student student;
-
 
     @FXML
     private TextField studentIdTextField;
@@ -74,7 +72,7 @@ public class EditStudentDialogController {
     public void setStage(Stage stage) {
         this.stage = stage;
     }
-    //set student and set initial text of TextFields to the value of student's attributes
+    // Sets the student and sets the initial text of TextFields to the value of the student's attributes
     public void setStudent(Student student) {
         this.student = student;
         this.studentIdTextField.setText(student.getStudentId());

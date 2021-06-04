@@ -33,9 +33,9 @@ public class SchoolYearOverviewController {
     public SchoolYearOverviewController() {
     }
 
-    /**
-     * Initializes the controller class. This method is automatically called
-     * after the fxml file has been loaded.
+    /*
+        Initializes the controller class. 
+        This method is automatically called after the fxml file has been loaded.
      */
     @FXML
     private void initialize(){
@@ -66,28 +66,28 @@ public class SchoolYearOverviewController {
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(GradeBookApp.class.getResource("/CourseOverview.fxml"));
                 AnchorPane page = (AnchorPane) loader.load();
-                //stores page in courseInfoShown so can be referenced and removed if courseInfo is deleted
+                // Stores the page in courseInfoShown so can it can be referenced and removed if courseInfo is deleted
 
 
-                //get CourseOverviewController and link it with StudentInfoSystemApp, also communicate to it which semester is selected
+                // Gets the CourseOverviewController, links it with the app, and communicates which semester is selected
                 CourseOverviewController controller = loader.getController();
                 controller.setStudentInfoSystemApp(this.app);
                 controller.setCourseInfo(courseInfo);
                 controller.setSemester(semester);
 
-                //get classTableView from controller and set it with assignments from selected course
+                // Gets classTableView from controller and sets it with the assignments from the selected course
                 controller.getImportedAssignmentsTableView().setItems(courseInfo.getGradedItems());
 
 
-                //get classTableView from controller and set it with students from selected course
+                // Gets classTableView from controller and sets it with the students from the selected course
                 controller.getImportedStudentTableView().setItems(courseInfo.getStudents());
 
 
-                //make page fit to parent rightAnchorPane
+                // Makes the page fit to its parent rightAnchorPane
                 page.prefHeightProperty().bind(rightAnchorPane.heightProperty());
                 page.prefWidthProperty().bind(rightAnchorPane.widthProperty());
 
-                //remove old displayed page and add new page to rightAnchorPane
+                // Removes the old displayed page and adds the new page to rightAnchorPane
                 if(this.courseInfoShown != null) {
                     rightAnchorPane.getChildren().remove(this.courseInfoShown);
                 }
@@ -99,7 +99,9 @@ public class SchoolYearOverviewController {
             }
         }
     }
-    //fall Courses handlers
+    /* 
+        Fall Courses handlers
+    */
     @FXML
     private void handleNewFallCourse(){
         if(app.getSchoolYearInfo().getSchoolYear().equals("none")){
@@ -117,7 +119,7 @@ public class SchoolYearOverviewController {
     private void handleEditFallCourse(){
         int indexOfSelectedFallCourse = fallSemesterClasses.getSelectionModel().getSelectedIndex();
         if(indexOfSelectedFallCourse > -1){
-            //get selected fall course using index
+            // Gets the selected fall course using index
             CourseInfo selectedFallCourse = this.app.getSchoolYearInfo().getListOfFallCourses().get(indexOfSelectedFallCourse);
             try{
                 FXMLLoader loader = new FXMLLoader();
@@ -137,7 +139,7 @@ public class SchoolYearOverviewController {
                 controller.setStage(stage);
 
                 stage.showAndWait();
-                //clear selection then reselect to refresh SchoolYearOverview with new edited information
+                // Clears the selection then reselects it in order to refresh SchoolYearOverview with the new edited information
                 fallSemesterClasses.getSelectionModel().clearSelection();
                 fallSemesterClasses.getSelectionModel().select(indexOfSelectedFallCourse);
 
@@ -180,7 +182,7 @@ public class SchoolYearOverviewController {
     private void handleEditSpringCourse(){
         int indexOfSelectedSpringCourse = springSemesterClasses.getSelectionModel().getSelectedIndex();
         if(indexOfSelectedSpringCourse > -1){
-            //get selected spring course using index
+            // Gets teh selected spring course using index
             CourseInfo selectedSpringCourse = this.app.getSchoolYearInfo().getListOfSpringCourses().get(indexOfSelectedSpringCourse);
             try{
                 FXMLLoader loader = new FXMLLoader();
@@ -201,7 +203,7 @@ public class SchoolYearOverviewController {
 
                 stage.showAndWait();
 
-                //clear selection then reselect to refresh SchoolYearOverview with new edited information
+                // Clears the selection and then reselect it in order to refresh SchoolYearOverview with the new edited information
                 springSemesterClasses.getSelectionModel().clearSelection();
                 springSemesterClasses.getSelectionModel().select(indexOfSelectedSpringCourse);
 

@@ -33,11 +33,11 @@ public class EditCourseDialogController {
             String newCourseName = this.courseNameTextField.getText();
             String newCoursePeriod = this.coursePeriodTextField.getText();
 
-            //set courseInfo with new info
+            //Sets courseInfo with new info
             this.courseInfo.setCourseName(newCourseName);
             this.courseInfo.setCoursePeriod(newCoursePeriod);
 
-            //update each students info
+            // Updates each student's info
             for(Student student: this.courseInfo.getStudents()){
                 student.setCourseName(newCourseName);
                 student.setCoursePeriod(newCoursePeriod);
@@ -76,7 +76,7 @@ public class EditCourseDialogController {
             return false;
         }
     }
-    //setters
+
     public void setApp(GradeBookApp app) {
         this.app = app;
     }

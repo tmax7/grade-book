@@ -29,7 +29,6 @@ public class NewSchoolYearDialogController {
         this.stage = stage;
     }
 
-
     @FXML
     private void handleOK() {
         if(isInputValid()){

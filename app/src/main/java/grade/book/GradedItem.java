@@ -6,7 +6,7 @@ import javafx.beans.property.StringProperty;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-//requires Xml annotation because class is used in marshalling of xml
+// Requires XML annotation because class is used in marshalling of XML
 @XmlRootElement
 public class GradedItem {
     StringProperty ID = new SimpleStringProperty("none");
@@ -14,11 +14,13 @@ public class GradedItem {
     StringProperty score = new SimpleStringProperty("none");
     StringProperty maxScore = new SimpleStringProperty("none");
 
-    //IMPORTANT: percentGrade is a derived property of score and must be recalculated if score or maxScore is changed
-    //using calculatePercentGrade(score, maxScore);
+    /* 
+        IMPORTANT: percentGrade is a derived property of score and must be recalculated if score or maxScore is changed
+        using calculatePercentGrade(score, maxScore);
+    */
     StringProperty percentGrade = new SimpleStringProperty("none");
 
-    // can/should it be enum? "LATE" "MISSING" etc.
+    // TODO can/should it be enum? "LATE" "MISSING" etc.
     StringProperty note = new SimpleStringProperty("none");
     StringProperty description = new SimpleStringProperty("none");
 
@@ -42,7 +44,8 @@ public class GradedItem {
         if(description != null) {this.description.setValue(description); }
 
     }
-    //deep copy constructor
+
+    // Deep copy constructor
     public GradedItem(GradedItem gradedItem){
        if(gradedItem.getID() != null) { this.ID.setValue(gradedItem.getID()); }
 
@@ -134,7 +137,7 @@ public class GradedItem {
         return percentGrade;
     }
 
-    //TODO see if can safely get rid of this method because it is unsafe because percentGrade should be derived propertly
+    // TODO see if you can safely get rid of this method because it is unsafe because percentGrade should be a derived property
     public void setPercentGrade(String percentGrade) {
         this.percentGrade.set(percentGrade);
     }
@@ -163,7 +166,6 @@ public class GradedItem {
         this.description.set(description);
     }
 
-    //
     public void calculatePercentGrade(String score, String maxScore){
         if(!(score.equals("none") || maxScore.equals("none"))){
             double scoreInt = Double.parseDouble(score);

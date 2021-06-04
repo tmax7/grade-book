@@ -16,7 +16,6 @@ import java.io.File;
 import java.io.IOException;
 
 public class RootLayoutController {
-
     GradeBookApp app;
 
     public RootLayoutController(){
@@ -41,8 +40,6 @@ public class RootLayoutController {
                 app.showNewSchoolYearDialog();
             }
         });
-
-
     }
 
     @FXML
@@ -73,24 +70,22 @@ public class RootLayoutController {
     private void handleSaveAs_SchoolYearFile() {
         FileChooser fileChooser = new FileChooser();
 
-        // Set extension filter and
-        // Set initial name for file and
+        // Sets the extension filter and the initial name for the file
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("XML files (*.xml)", "*.xml");
         fileChooser.getExtensionFilters().add(extFilter);
         String schoolYearFileName = app.getSchoolYearInfo().getSchoolYear() + "_school_year";
         fileChooser.setInitialFileName(schoolYearFileName);
 
-        // Show save file dialog and create file from it's result
+        // Shows the save file dialog and creates the file from it's result
         File file = fileChooser.showSaveDialog(app.getPrimaryStage());
 
         if (file != null) {
-            // Make sure it has the correct extension
+            // Makes sure it has the correct extension
             if (!file.getPath().endsWith(".xml")) {
                 file = new File(file.getPath() + ".xml");
             }
             app.saveSchoolYearToFile(file);
         }
-
     }
 
     @FXML
@@ -125,8 +120,6 @@ public class RootLayoutController {
             } catch(IOException e){
                 e.printStackTrace();
             }
-
-
         }
     }
 
@@ -145,8 +138,5 @@ public class RootLayoutController {
 
         alert.showAndWait();
     }
-
-
-
 
 }

@@ -8,7 +8,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class NewStudentDialogController {
-
     CourseInfo courseInfo;
     Stage stage;
 
@@ -22,6 +21,7 @@ public class NewStudentDialogController {
     public NewStudentDialogController(){
 
     }
+
     @FXML
     private void initialize(){
 
@@ -37,12 +37,12 @@ public class NewStudentDialogController {
             String lastName = lastNameTextField.getText();
 
 
-            //create student from text field input, information from courseInfo and a clone of gradedItems
+            // Creates a student from the text field input, information from courseInfo, and a clone of gradedItems
             Student student = new Student(courseName, coursePeriod, studentId, firstName, lastName, null);
 
-            //add student to course info and makes a copy of courseInfo's gradedItem list and gives it to the student
+            // Adds the student to courseInfo and makes a copy of courseInfo's gradedItem list and gives it to the student
             this.courseInfo.addStudent(student);
-            //close the window
+            // Closes the window
             this.stage.close();
         }
     }

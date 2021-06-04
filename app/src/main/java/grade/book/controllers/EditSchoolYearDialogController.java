@@ -35,7 +35,6 @@ public class EditSchoolYearDialogController {
 
             stage.close();
         }
-
     }
 
     @FXML
@@ -59,7 +58,6 @@ public class EditSchoolYearDialogController {
         } catch(NumberFormatException e) {
             errorMessage += "Year must be entered as a number e.g. 2005";
         }
-
 
         if(errorMessage.length() == 0) {
             return true;
